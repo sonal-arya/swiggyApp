@@ -1,0 +1,59 @@
+● What is Emmet?
+    Emmet is a toolkit (primarily a plugin for code editors) that dramatically speeds up HTML and CSS workflow.
+    It allows you to use shorthand abbreviations that expand into full-fledged code structures.
+
+Example:
+Typing div.my-class#my-id in your editor and then triggering the Emmet expansion would generate this HTML:
+HTML
+<div class="my-class" id="my-id"></div>
+
+Use code with caution.
+
+● Difference between a Library and a Framework?
+    Library:
+        A collection of reusable code components to perform specific tasks.
+        You call upon library functions when you need them.
+        Focus: Flexibility, picking and choosing what you use.
+        Example: React (you decide on structure and how to use components)
+    Framework:
+        Provides a more opinionated structure or skeleton for your application.
+        The framework often dictates the flow of control. You fill in the blanks.
+        Focus: Standardization and a well-defined way of doing things.
+        Example: Angular (provides strict architecture)
+
+● What is a CDN? Why do we use it?
+    CDN (Content Delivery Network): A geographically distributed network of servers designed to deliver web content (like JavaScript libraries, images, CSS) to users faster.
+    Why use CDNs:
+        Faster page load times: CDNs place resources closer to the user, reducing the distance data needs to travel.
+        Reduced server load: CDNs lessen the burden on your own servers.
+        Reliability: CDNs handle traffic spikes and offer protection against some attacks.
+
+● Why is React known as React?
+    React was designed to "react" to changes in data. When the underlying data of a component changes, React efficiently re-renders only the necessary parts of the user interface. This reactivity makes it well-suited for building dynamic UIs.
+
+● What is crossorigin in script tag?
+    The crossorigin attribute handles Cross-Origin Resource Sharing (CORS) requests for resources from other domains. Browsers use CORS as a security measure.
+
+    Example:
+    HTML
+    <script src="https://some-cdn.com/library.js" crossorigin="anonymous"></script>
+
+    Use code with caution.
+
+    Values:
+        anonymous: Sends the request without credentials (cookies, etc.).
+        use-credentials: Sends the request with credentials.
+
+● What is the difference between React and ReactDOM?
+    React: The core library containing components, state, props, and the logic for building user interfaces. It's universal, usable for web, mobile, etc.
+    ReactDOM:  A renderer. It bridges React with the actual web browser's DOM. It provides methods like ReactDOM.render() to mount your React components onto web pages.
+
+● What is the difference between react.development.js and react.production.js files via CDN?
+    react.development.js:
+        Larger file size.
+        Includes extra checks and helpful warnings during development.
+        Not meant for production use.
+    react.production.js
+        Minified and optimized for speed and file size.
+        Strips out development-only code.
+        Intended for production environments.
