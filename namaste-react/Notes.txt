@@ -1,0 +1,50 @@
+1> React.createElement => object => HTMLElement(render)
+
+==== bhind the secne react.createElement creates a object but when render this on to the dom it become HTMLElement
+
+2. to displace on broweer we used reactdom.createElement
+3. JSX == jsx not a HTML inside a js
+4. JSX is a HTML like syntax or XML look like syntax
+
+
+
+
+
+
+
+
+HOW REACT WORK =---------------------------------
+
+import { useEffect, useState } from "react";
+import ResList from "../utils/mockData";
+import RestaurantCard from "./ResturantCard";
+
+
+
+const Body = () => {
+  const [text ,setText] = useState("undefiend 0");
+  console.log(text,"before useEffect") // 1  // 6
+  useEffect(()=>{ console.log("useEffect @@@@@@@@@@@@"); },[text]);  //4 //9
+  console.log(text,"after useEffect") // 2  // 7
+
+  const textFunc = () =>{
+    setText("function call -----")
+  }
+    return (
+
+      <div className="body">
+                {console.log("body return..!")}    {/* 3 // 8 */} 
+        <div className="search" style={{width : "90%" , height:"100px"}} onMouseMove={textFunc}>Search</div>   {/*5 */}
+        <div className="res-container">
+          {ResList.map((restaurant) => (
+            <RestaurantCard key={restaurant.data.id} resData={restaurant} />
+          ))}
+        </div>
+      </div>
+    );
+  };
+  export default Body ; 
+
+
+--------------------------------------------------------
+
