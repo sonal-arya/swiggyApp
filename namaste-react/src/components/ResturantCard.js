@@ -8,7 +8,7 @@ const RestaurantCard = (props) => {
 
   const { cloudinaryImageId, name, avgRating, cuisines, costForTwo, deliveryTime, sla,areaName} = resData?.info;
 
-  console.log(resData.info)
+  // console.log(resData.info)
   return (
     <div className=" hover:shadow-2xl m-4 w-80  h-5/5 rounded-xl ease-in-out duration-300 shadow-lg relative" style={{ backgroundColor: "#f0f0f0" }}>
       <img

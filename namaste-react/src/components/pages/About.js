@@ -1,4 +1,4 @@
-import UserClass from "./typeComponents/UserClass";
+import UserClass from "../typeComponents/UserClass";
 import { Component } from 'react';
 
 class About extends Component {

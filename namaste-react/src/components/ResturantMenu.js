@@ -1,9 +1,7 @@
-import Shimmer from "./Shimmer";
+import Shimmer from "../Shimmer/Shimmer";
 import { useParams } from 'react-router-dom';
 import useResturantMenu from '../utils/useResturantMenu';
 import { Food, GreenStar } from "../utils/svg";
-
-import "./index.css";
 import { CDN_URL } from "../utils/constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const ResturantMenu = () => {
@@ -22,7 +20,7 @@ const ResturantMenu = () => {
     const { itemCards } = cardAccess?.card?.card;
     // const { info } = cardAccess?.card?.card?.item?.card;
 
-    console.log(cardAccess?.card?.card.itemCards)
+    // console.log(cardAccess?.card?.card.itemCards)
     return (
         < div className=" my-12 grid justify-items-center">
             <div className=" p-3 w-1/2 ">
@@ -34,7 +32,7 @@ const ResturantMenu = () => {
                     <div className="rounded-2xl p-5 border border-inherit bg-slate-50">
                         <h2 className="text-base flex font-bold from-neutral-800">  {GreenStar} {avgRatingString} ({totalRatingsString}) * {costForTwoMessage} </h2>
                         <p className="text-red-500 text-sm font-extrabold underline underline-offset-2">{cuisines.join(" , ")}  </p>
-                        
+
                         <div className="outlet-info-container ">
                             <div className="timeline">
                                 <span className="circle"></span>
@@ -53,14 +51,14 @@ const ResturantMenu = () => {
 
 
                 <h3 className="flex justify-center my-5">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-  <path strokeLinecap="round" strokeLinejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
-</svg>
-  Menu
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-  <path strokeLinecap="round" strokeLinejoin="round" d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
-</svg>
- </h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+                    </svg>
+                    Menu
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
+                    </svg>
+                </h3>
                 <div className=" p-3">
                     <ul>
                         {itemCards.map((item) => (
@@ -71,9 +69,9 @@ const ResturantMenu = () => {
                                         <p>{"Rs."} {(item.card.info.defaultPrice || item.card.info.price) / 100}</p>
                                         <p className="text-wrap text-base text-slate-500"> {item.card.info.description}</p>
                                     </div>
-                                     <div className="">
-                                        <img className="rounded-xl h-32 w-32" src={CDN_URL + item.card.info.imageId} alt=""/>
-                                     </div>
+                                    <div className="">
+                                        <img className="rounded-xl h-32 w-32" src={CDN_URL + item.card.info.imageId} alt="" />
+                                    </div>
                                 </div>
                             </li>
                         ))}
