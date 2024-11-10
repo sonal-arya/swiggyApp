@@ -9,7 +9,8 @@ const Header = () => {
   const [btnName, setBtnName] = useState("Login");
   const token = localStorage.getItem('token');
   const [user, setUser] = useState("");
-
+  const userN = user.userName ;
+  const [userName, setUserName] = useState(user.userName);
   const navigator = useNavigate();
 
   useEffect(() => {
@@ -24,27 +25,28 @@ const Header = () => {
       );
         setUser(res.data);
       }catch(error){
-        console.log(error,"err")
+        // console.log(error,"err")
       }
     };
     if(token){
 
       fetchData();
     }
+    
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     navigator('/login');
   };
-  console.log(user,"user")
+  // console.log(user,"user" ,userName ,userN)
   const renderAuthButton = () =>{
     if(!token){
       return 
         <button className="login w-10"><Link to="/login">Login</Link></button> 
     
     }else{
-      return(<><span className="">{userIcon}{user.username}</span>
+      return(<><span className="w-16 flex justify-between">{userIcon}{user.username}</span>
        <button className="login w-10" onClick={handleLogout}>Logout</button> 
        </>) 
     }
@@ -62,7 +64,7 @@ const Header = () => {
       </div>
       <div className="p-4 m-4 w-2/5">
         <ul className="flex justify-between">
-          <li>Online {internetStatus == true ? " on" : " off "}</li>
+          {/* <li>Online {internetStatus == true ? " on" : " off "}</li> */}
           <li className="hover:scale-125"><Link to="/">Home</Link></li>
           <li className="hover:scale-125"> <Link to="/about">About Us</Link></li>
           <li className="hover:scale-125"><Link to="/contact">Contact Us</Link></li>

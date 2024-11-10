@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import RestaurantCard from "./ResturantCard";
+import RestaurantCard , { withDiscount }from "./ResturantCard";
 import Shimmer from "../Shimmer/Shimmer";
 import { RES_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
@@ -10,7 +10,7 @@ const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [filterRestaurant, setFilterRestaurant] = useState([])
   const [searchText, setSearchText] = useState('');
-
+  const DiscountedPriceResturant =  withDiscount(RestaurantCard);
   useEffect(() => {
     fectData();
   }, []);
@@ -54,7 +54,9 @@ const Body = () => {
       <div className="flex justify-between flex-wrap px-14  ">
         {filterRestaurant?.map((restaurant) => (
           <Link key={restaurant.info.id} to={"/resturants/" + restaurant.info.id}>
-            <RestaurantCard resData={restaurant} />
+            {restaurant.info.aggregatedDiscountInfoV3 ? <DiscountedPriceResturant resData={restaurant}  discount={restaurant.info.aggregatedDiscountInfoV3}/> : <RestaurantCard resData={restaurant} />
+            }
+            {/* <RestaurantCard resData={restaurant} /> */}
           </Link>
         ))}
       </div>

@@ -6,13 +6,13 @@ import { GreenStar } from "../utils/svg";
 const RestaurantCard = (props) => {
   const { resData } = props;
 
-  const { cloudinaryImageId, name, avgRating, cuisines, costForTwo, deliveryTime, sla,areaName} = resData?.info;
+  const { cloudinaryImageId, name, avgRating, cuisines, costForTwo, deliveryTime, sla, areaName } = resData?.info;
 
-  // console.log(resData.info)
+  // console.log(resData.info.name  , resData.info.aggregatedDiscountInfoV3)
   return (
-    <div className=" hover:shadow-2xl m-4 w-80  h-5/5 rounded-xl ease-in-out duration-300 shadow-lg relative" style={{ backgroundColor: "#f0f0f0" }}>
+    <div className=" hover:shadow-2xl m-4 w-80  h-5/5 rounded-xl ease-in-out duration-300 shadow-lg " style={{ backgroundColor: "#f0f0f0" }}>
       <img
-        className=" rounded-t-xl ease-in-out duration-300" style={   { height: "207px" ,  width: "100%"}}
+        className=" rounded-t-xl" style={{ height: "207px", width: "100%" }}
         alt="res-logo"
         src={
           CDN_URL +
@@ -30,4 +30,20 @@ const RestaurantCard = (props) => {
     </div>
   );
 };
+
+// HOC
+
+export const withDiscount = (RestaurantCard) => {
+
+  return (props) => {
+    console.log(props);
+    return (
+      <div>
+        <label className="ml-2 px-3 absolute bottom-0.3 font-[900] bg-lime-500 text-white shadow-xl rounded-sm ">{props.discount.header}{props.discount.subHeader}</label>
+        <RestaurantCard {...props} />
+      </div>
+    )
+  }
+}
+
 export default RestaurantCard;
