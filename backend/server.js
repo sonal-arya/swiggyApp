@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 const authRoutes = require('./routes/auth')
+const dataRoutes = require('./routes/data')
 const cors = require('cors')
 const corsOptions = {
     origin: 'http://localhost:1234', 
@@ -25,7 +26,8 @@ mongoose.connect(process.env.MONGOOSE_URL ,{
 .then(()=> console.log("MongoDB is connected Now"))
 .catch((err)=> console.log("There is some error , Find out mongodb is still not connected" ,err) )
 
-app.use('/api/auth',authRoutes) 
+app.use('/api/auth', authRoutes) 
+app.use('/api/', dataRoutes)
 
 const PORT  = process.env.PORT;
 
