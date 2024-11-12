@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.post('/register', async (req, res) => {
     const { username, email, phone, password } = req.body;
-    console.log(req.body, username, email, phone, password, "**********************")
+    // console.log(req.body, username, email, phone, password, "**********************")
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = new User({ username, email, phone, password: hashedPassword })
@@ -41,8 +41,5 @@ router.post('/login', async (req, res) => {
 router.get('/dashboard', auth, (req, res) => {
     res.send('This is a protected route');
 });
-
-
-
 
 module.exports = router
