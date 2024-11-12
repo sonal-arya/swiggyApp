@@ -9,7 +9,6 @@ const router = express.Router();
 
 router.post('/register', async (req, res) => {
     const { username, email, phone, password } = req.body;
-    // console.log(req.body, username, email, phone, password, "**********************")
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = new User({ username, email, phone, password: hashedPassword })
@@ -22,15 +21,13 @@ router.post('/register', async (req, res) => {
 
 
 router.post('/login', async (req, res) => {
-    console.log(req.body)
     const { username, password } = req.body;
     try {
         const user = await User.findOne({ username: username })
         const isMatch = await bcrypt.compare(password, user.password)
         if (!isMatch) return res.status(401).json({ msg: "User not found" })
-
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' })
-        res.json({ token })
+        res.status(200).json({ token: token , msg:"User login successfully"})
     } catch (err) {
         console.log("Error in login: ", err);
         res.status(500).json({ error: err.message })
@@ -38,8 +35,19 @@ router.post('/login', async (req, res) => {
 
 })
 
-router.get('/dashboard', auth, (req, res) => {
-    res.send('This is a protected route');
+router.get('/user', auth, async (req, res) => {
+    try{
+        console.log( req.user , "User not found");
+        const user = await User.findById(req.user).select('-password');
+        if (!user) {
+            return res.status(404).json({ msg: "User not found" });
+        }
+        res.json(user);
+    }catch(err){
+        console.error(err.message);
+        res.status(500).send('sever error');
+
+    }
 });
 
 module.exports = router

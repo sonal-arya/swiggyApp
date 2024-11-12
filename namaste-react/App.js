@@ -1,24 +1,23 @@
 import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import logo from "./assets/swiggy_log.webp"
-import Header from "./src/components/Header";
+import Header from "./src/common/Header";
 import Body from "./src/components/Body";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import About from "./src/components/About";
-import Error from "./src/components/Error";
-import Contact from "./src/components/Contact";
+import About from "./src/components/pages/About";
+import Error from "./src/Error/Error";
+import Contact from "./src/components/pages/Contact";
 import ResturantMenu from "./src/components/ResturantMenu";
-import Login from "./src/components/Login";
-import Register from "./src/components/Register";
-import PrivateRoute from "./src/components/PrivateRoute";
-import Dashboard from "./src/components/Dashboard";
+import Login from "./src/components/Auth/Login";
+import Register from "./src/components/Auth/Register";
+import PrivateRoute from "./src/components/Auth/PrivateRoute";
+import Dashboard from "./src/components/pages/Dashboard";
 
 const Grocery = lazy(() => import("./src/components/Grocery"))
-
 const AppLayout = () => {
   return (
     <div className="app">
-      <Header />
+      <Header/>
       <Outlet />
     </div>
   );
@@ -61,7 +60,14 @@ const appRrouter = createBrowserRouter([
     },
     {
       path: "/dashboard",
-      element:   <PrivateRoute element={<Dashboard/>} />
+      element:   <PrivateRoute/>,
+      children: [
+        {
+          path: "",
+          element: <Body/>
+        }
+      ]
+
     }
     ],
     errorElement: <Error />,

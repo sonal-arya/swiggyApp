@@ -1,32 +1,49 @@
-import Shimmer from "./Shimmer";
+import Shimmer from "../Shimmer/Shimmer";
 import { useParams } from 'react-router-dom';
 import useResturantMenu from '../utils/useResturantMenu';
-import { Food, GreenStar } from "../utils/svg";
-
-import "./index.css";
+import { ArrowLeftIcon, ArrowRightIcon, Food, GreenStar } from "../utils/svg";
 import { CDN_URL } from "../utils/constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState, useEffect } from "react";
 const ResturantMenu = () => {
 
     const { resId } = useParams();
+    const [toggle , setToggle] = useState(false);
+    const [counter , setCounter] = useState(1);
 
     const resInfo = useResturantMenu(resId);
 
     if (resInfo === null) return <Shimmer />
-
     const { name, cuisines, avgRatingString, costForTwoMessage, cloudinaryImageId, totalRatingsString, areaName, sla } = resInfo?.cards[2]?.card?.card?.info;
     const menuLen = resInfo.cards.length;
+    const resturantMenu = resInfo;
     const cardAccess = resInfo?.cards[menuLen - 1].groupedCard?.cardGroupMap?.REGULAR.cards.find((item) => {
         return (item.card.card.title == "Recommended") ? item : item[2];
     });
+    console.log(resturantMenu , "resturant menu");
     const { itemCards } = cardAccess?.card?.card;
-    // const { info } = cardAccess?.card?.card?.item?.card;
 
-    console.log(cardAccess?.card?.card.itemCards)
+    const handleAdd = () =>{
+        setToggle(true);
+    }
+    const handleIncrement = () =>{
+        setCounter(counter+1);
+    }
+    const handleDecrement = () =>{
+        if(counter > 1) { 
+            setCounter(counter-1)
+            
+        } 
+        else if (counter == 0){ 
+            setToggle(false)
+        } 
+        
+    }
+    // console.log(counter)
+    // console.log(cardAccess?.card?.card.itemCards ,menuLen)
     return (
-        < div className=" my-12 grid justify-items-center">
+        <div className=" my-12 grid justify-items-center">
             <div className=" p-3 w-1/2 ">
-
                 <div className="rounded-2xl p-5 bg-gradient-to-t from-slate-200 to-white ">
                     <div className="">
                         <h1 className="font-bold  resMenuhead ">{name} </h1>
@@ -34,7 +51,7 @@ const ResturantMenu = () => {
                     <div className="rounded-2xl p-5 border border-inherit bg-slate-50">
                         <h2 className="text-base flex font-bold from-neutral-800">  {GreenStar} {avgRatingString} ({totalRatingsString}) * {costForTwoMessage} </h2>
                         <p className="text-red-500 text-sm font-extrabold underline underline-offset-2">{cuisines.join(" , ")}  </p>
-                        
+
                         <div className="outlet-info-container ">
                             <div className="timeline">
                                 <span className="circle"></span>
@@ -50,17 +67,7 @@ const ResturantMenu = () => {
                     </div>
                 </div>
 
-
-
-                <h3 className="flex justify-center my-5">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-  <path strokeLinecap="round" strokeLinejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
-</svg>
-  Menu
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-  <path strokeLinecap="round" strokeLinejoin="round" d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
-</svg>
- </h3>
+                <h3 className="flex justify-center my-5"> {ArrowLeftIcon}  Menu  {ArrowRightIcon}   </h3>
                 <div className=" p-3">
                     <ul>
                         {itemCards.map((item) => (
@@ -71,9 +78,18 @@ const ResturantMenu = () => {
                                         <p>{"Rs."} {(item.card.info.defaultPrice || item.card.info.price) / 100}</p>
                                         <p className="text-wrap text-base text-slate-500"> {item.card.info.description}</p>
                                     </div>
-                                     <div className="">
-                                        <img className="rounded-xl h-32 w-32" src={CDN_URL + item.card.info.imageId} alt=""/>
-                                     </div>
+                                    <div className="relative h-36">
+                                        <img className="rounded-xl h-32 w-36" src={CDN_URL + item.card.info.imageId} alt="" />
+                                        {toggle ? 
+                                        <div className="flex justify-between w-32 px-8 py-2 h-10 absolute bottom-0.5 left-2 text-white font-extrabold border bg-green-600 rounded-xl ">
+                                            <button className=" " onClick={handleDecrement}>-</button>
+                                            <span>{counter}</span>
+                                            <button className=" " onClick={handleIncrement}>+</button>
+
+                                        </div> : 
+                                        <button className="w-32 px-8 py-2 h-10 absolute bottom-0.5 left-2 text-green-700 font-extrabold border bg-slate-100 rounded-xl " onClick={handleAdd}>ADD</button>
+                                         } 
+                                    </div>
                                 </div>
                             </li>
                         ))}
