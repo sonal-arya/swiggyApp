@@ -14,12 +14,13 @@ const ResturantMenu = () => {
     const resInfo = useResturantMenu(resId);
 
     if (resInfo === null) return <Shimmer />
-
     const { name, cuisines, avgRatingString, costForTwoMessage, cloudinaryImageId, totalRatingsString, areaName, sla } = resInfo?.cards[2]?.card?.card?.info;
     const menuLen = resInfo.cards.length;
+    const resturantMenu = resInfo;
     const cardAccess = resInfo?.cards[menuLen - 1].groupedCard?.cardGroupMap?.REGULAR.cards.find((item) => {
         return (item.card.card.title == "Recommended") ? item : item[2];
     });
+    console.log(resturantMenu , "resturant menu");
     const { itemCards } = cardAccess?.card?.card;
 
     const handleAdd = () =>{
