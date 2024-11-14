@@ -5,7 +5,7 @@ const authRoutes = require('./routes/auth')
 const dataRoutes = require('./routes/data')
 const cors = require('cors')
 const corsOptions = {
-    origin: 'https://swiggypro.netlify.app/', 
+    origin: 'https://swiggypro.netlify.app', 
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, 
     optionsSuccessStatus: 204
