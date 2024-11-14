@@ -17,7 +17,7 @@ const Body = () => {
 
   const fectData = async () => {
     // const localApiCall = await fetch("localhost:5001/api/data/restauren")
-    const data = await fetch("http://localhost:5001/api/restaurents");
+    const data = await fetch(RES_URL);
     const json = await data.json();
     setListOfRestaurants(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     setFilterRestaurant(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);

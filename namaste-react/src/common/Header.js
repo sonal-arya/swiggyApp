@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import { userIcon } from "../utils/svg";
 import axios from "axios";
+import { AUTH_URL } from "../utils/constants";
 const Header = () => {
   const internetStatus = useOnlineStatus();
   const [btnName, setBtnName] = useState("Login");
@@ -16,7 +17,7 @@ const Header = () => {
   useEffect(() => {
     const fetchData = async () => {
       try{
-        const res = await axios.get('http://localhost:5000/api/auth/user', 
+        const res = await axios.get(AUTH_URL+'user', 
           {
           headers: {
             Authorization: token 

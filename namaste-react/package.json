@@ -4,7 +4,8 @@
   "description": "Geting deep inside in react",
   "scripts": {
     "start": "npx parcel index.html",
-    "test": "jest"
+    "test": "jest",
+    "build": "parcel build index.html"
   },
   "keywords": [
     "react",
